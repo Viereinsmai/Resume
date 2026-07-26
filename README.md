@@ -20,10 +20,15 @@
 
 ## 📂 Project Structure
 my-resume/
+
 ├── index.html # Main HTML file (contains all CSS & JS)
+
 ├── README.md # This file
+
 ├── images/ # Personal photos and cover images (not included in public template)
+
 ├── pdfs/ # Teaching demo PDF files
+
 └── videos/ # Teaching demo videos (optional, use external links if >100MB)
 
 
