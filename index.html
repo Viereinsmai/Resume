@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MA Xinyi (Maia) · Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ========== 全局重置 & 莫兰迪变量 ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg: #f4f0ec;
+            --card-bg: #fcfaf7;
+            --primary: #b5a6b6;
+            --primary-dark: #9b8a9c;
+            --primary-light: #d4c5c9;
+            --text: #4a4240;
+            --text-light: #7a6e6a;
+            --border: #e2dad5;
+            --shadow: 0 10px 30px rgba(120, 100, 100, 0.08);
+            --radius: 24px;
+            --transition: 0.25s ease;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            background-image: 
+                repeating-linear-gradient(45deg, rgba(181, 166, 182, 0.03) 0px, rgba(181, 166, 182, 0.03) 2px, transparent 2px, transparent 8px),
+                repeating-linear-gradient(135deg, rgba(181, 166, 182, 0.03) 0px, rgba(181, 166, 182, 0.03) 2px, transparent 2px, transparent 8px);
+            color: var(--text);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        .container {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ========== 导航栏 ========== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            background: rgba(252, 250, 247, 0.88);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            height: 72px;
+            display: flex;
+            align-items: center;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            color: var(--text);
+        }
+        .logo span {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-light);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-dark);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: var(--text);
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a.active {
+            color: var(--text);
+        }
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .lang-switch {
+            display: flex;
+            gap: 4px;
+            background: var(--bg);
+            border-radius: 40px;
+            padding: 4px;
+            border: 1px solid var(--border);
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .lang-btn.active {
+            background: #fff;
+            color: var(--text);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+        .lang-btn:hover {
+            color: var(--text);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ========== 通用标题 ========== */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+        .section {
+            padding: 72px 0;
+        }
+        .section-alt {
+            background: rgba(252, 250, 247, 0.6);
+        }
+
+        /* ========== HERO ========== */
+        #home {
+            padding-top: 20px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            align-items: center;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .hero-content h1 .highlight {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            max-width: 480px;
+            margin-bottom: 28px;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: rgba(181, 166, 182, 0.20);
+            color: var(--primary-dark);
+            padding: 4px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        .btn-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 4px 14px rgba(181, 166, 182, 0.30);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(181, 166, 182, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--text);
+            border: 1.5px solid var(--border);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .avatar-wrapper {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            padding: 6px;
+            box-shadow: 0 16px 48px rgba(181, 166, 182, 0.20);
+        }
+        .avatar-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #fff;
+        }
+
+        /* ========== 教育 & 经历卡片 ========== */
+        .entries-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .entry-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 24px 28px 28px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .entry-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(120, 100, 100, 0.10);
+        }
+        .entry-card .title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .entry-card .meta {
+            display: flex;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            flex-wrap: wrap;
+        }
+        .entry-card .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .entry-card .desc {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+        .entry-card .click-hint {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            color: var(--primary-dark);
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* ========== 项目卡片 ========== */
+        .works-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .work-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .work-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(120, 100, 100, 0.10);
+        }
+        .work-card .thumb {
+            height: 140px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .work-card .info {
+            padding: 18px 22px 22px;
+        }
+        .work-card .info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .work-card .info .tag {
+            display: inline-block;
+            background: rgba(181, 166, 182, 0.15);
+            color: var(--primary-dark);
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            margin-bottom: 6px;
+        }
+        .work-card .info p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ========== 教学演示（滑动式） ========== */
+        .teaching-scroll {
+            display: flex;
+            gap: 24px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        .teaching-scroll::-webkit-scrollbar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+        }
+        .teaching-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        .teaching-card {
+            flex: 0 0 320px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            scroll-snap-align: start;
+        }
+        /* PDF 封面（代替视频） */
+.pdf-cover {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    background-color: var(--primary-light); /* 备用背景色，当图片加载失败时显示 */
+    border-radius: var(--radius) var(--radius) 0 0;
+    transition: var(--transition);
+}
+/* 允许 a 标签使用 pdf-cover 样式 */
+
+a.pdf-cover:hover {
+    opacity: 0.9;
+}
+a.pdf-cover i {
+    font-size: 3.5rem;
+    text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+}
+        .teaching-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(120, 100, 100, 0.12);
+        }
+        .teaching-card video {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: #000;
+            display: block;
+        }
+        .teaching-card .info {
+            padding: 16px 18px 20px;
+        }
+        .teaching-card .info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .teaching-card .info .desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .teaching-card .info .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .teaching-card .info .actions a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+            background: transparent;
+            color: var(--text-light);
+        }
+        .teaching-card .info .actions a:hover {
+            border-color: var(--primary-dark);
+            color: var(--primary-dark);
+            background: rgba(181, 166, 182, 0.08);
+        }
+
+        /* ========== 技能 ========== */
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 32px 36px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .skill-tag {
+            background: rgba(181, 166, 182, 0.12);
+            color: var(--primary-dark);
+            padding: 6px 20px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        .skill-tag:hover {
+            background: rgba(181, 166, 182, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* ========== 图库（滑动式） ========== */
+        .gallery-scroll {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding-bottom: 12px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        .gallery-scroll::-webkit-scrollbar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 10px;
+        }
+        .gallery-scroll::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 10px;
+        }
+        .gallery-item {
+            flex: 0 0 240px;
+            aspect-ratio: 1 / 1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: #e2dad5;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            position: relative;
+            scroll-snap-align: start;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 36px rgba(120, 100, 100, 0.10);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(181, 166, 182, 0.30);
+            backdrop-filter: blur(2px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+            color: #fff;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 8px;
+            text-align: center;
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        /* ========== 页脚 ========== */
+        .footer {
+            background: #fcfaf7;
+            border-top: 1px solid var(--border);
+            padding: 36px 0;
+            margin-top: 20px;
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer .socials {
+            display: flex;
+            gap: 18px;
+        }
+        .footer .socials a {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+        .footer .socials a:hover {
+            color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .footer p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ========== 模态框 ========== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(74, 66, 64, 0.7);
+            backdrop-filter: blur(6px);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.25s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-box {
+            background: var(--card-bg);
+            max-width: 720px;
+            width: 100%;
+            max-height: 90vh;
+            border-radius: var(--radius);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+            padding: 32px 36px;
+            position: relative;
+            animation: scaleUp 0.25s ease;
+        }
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            font-size: 1.8rem;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .modal-close:hover {
+            color: var(--text);
+            transform: rotate(90deg);
+        }
+        .modal-box h2 {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .modal-box .meta {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .modal-box .desc {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            white-space: pre-wrap;
+        }
+        .modal-box .gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 12px;
+        }
+        .modal-box .gallery-thumbs img {
+            border-radius: 12px;
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border: 1px solid var(--border);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes scaleUp {
+            from { transform: scale(0.92); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .btn-group {
+                justify-content: center;
+            }
+            .avatar-wrapper {
+                width: 220px;
+                height: 220px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 68px; }
+            .navbar { height: 68px; }
+            .nav-links {
+                position: fixed;
+                top: 68px;
+                left: 0;
+                right: 0;
+                background: rgba(252, 250, 247, 0.98);
+                backdrop-filter: blur(16px);
+                flex-direction: column;
+                padding: 32px 24px;
+                gap: 20px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.04);
+                transform: translateY(-120%);
+                transition: var(--transition);
+                border-bottom: 1px solid var(--border);
+                align-items: flex-start;
+            }
+            .nav-links.open { transform: translateY(0); }
+            .hamburger { display: flex; }
+            .hero-content h1 { font-size: 2.4rem; }
+            .section-title { font-size: 1.8rem; }
+            .entries-grid { grid-template-columns: 1fr; }
+            .works-grid { grid-template-columns: 1fr; }
+            .teaching-card { flex: 0 0 280px; }
+            .gallery-item { flex: 0 0 160px; }
+            .footer .container { flex-direction: column; text-align: center; }
+            .lang-switch { margin-left: auto; }
+        }
+
+        @media (max-width: 480px) {
+            .teaching-card { flex: 0 0 240px; }
+            .gallery-item { flex: 0 0 130px; gap: 14px; }
+            .btn { padding: 10px 20px; font-size: 0.85rem; }
+            .container { padding: 0 16px; }
+            .avatar-wrapper { width: 160px; height: 160px; }
+            .modal-box { padding: 24px 18px; }
+            .modal-box .gallery-thumbs { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航栏 ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#home" class="logo">MA<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active" data-i18n="nav.home">Home</a></li>
+                <li><a href="#education" data-i18n="nav.education">Education</a></li>
+                <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+                <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+                <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+                <li><a href="#gallery" data-i18n="nav.gallery">Gallery</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+            </ul>
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中</button>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section id="home" class="section">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="hero-badge" data-i18n="hero.badge">✦ English Language & Linguistics</div>
+                <h1>
+                    <span data-i18n="hero.greeting">Hi, I'm</span><br />
+                    <span class="highlight" data-i18n="hero.name">MA Xinyi (Maia)</span>
+                </h1>
+                <p data-i18n="hero.desc">MA in English Studies for the Professions (ELT) @ PolyU. Passionate about language teaching and cross-cultural communication. Research interests in SLA, ELT, gestures, and cognitive linguistics.</p>
+                <div class="btn-group">
+        
+                    <a href="#education" class="btn btn-primary" data-i18n="hero.btn_edu">Education</a>
+                    <a href="#experience" class="btn btn-outline" data-i18n="hero.btn_exp">Experience</a>
+                    <a href="#projects" class="btn btn-outline" data-i18n="hero.btn_proj">Projects</a>
+                </div>
+            </div>
+            <div class="hero-avatar">
+                <div class="avatar-wrapper">
+                    <!-- 头像图片：请放入 images/avatar.jpg -->
+                    <img src="images/avatar.jpg" alt="Ma Xinyi" />
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 教育背景 ===== -->
+    <section id="education" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" data-i18n="education.title">Education</h2>
+            <p class="section-subtitle" data-i18n="education.sub">Academic qualifications & achievements.</p>
+            <div class="entries-grid" id="educationGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== 工作经历 ===== -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="experience.title">Work Experience</h2>
+            <p class="section-subtitle" data-i18n="experience.sub">Professional journey.</p>
+            <div class="entries-grid" id="experienceGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== 项目 ===== -->
+    <section id="projects" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" data-i18n="projects.title">Research & Projects</h2>
+            <p class="section-subtitle" data-i18n="projects.sub">Academic research, teaching innovations, and creative work.</p>
+            <div class="works-grid" id="projectsGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== 教学演示 (Teaching Demos) - 滑动式 ===== -->
+    <section id="teaching" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="teaching.title">Teaching Demos</h2>
+            <p class="section-subtitle" data-i18n="teaching.sub">Video recordings and PDF materials from my teaching practice.</p>
+            <div class="teaching-scroll" id="teachingContainer"></div>
+        </div>
+    </section>
+
+    <!-- ===== 技能 ===== -->
+    <section id="skills" class="section section-alt">
+        <div class="container">
+            <h2 class="section-title" data-i18n="skills.title">Skills & Certifications</h2>
+            <p class="section-subtitle" data-i18n="skills.sub">Languages, tools, and professional qualifications.</p>
+            <div class="skills-wrapper" id="skillsContainer"></div>
+        </div>
+    </section>
+
+    <!-- ===== 图库 ===== -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="gallery.title">Gallery</h2>
+            <p class="section-subtitle" data-i18n="gallery.sub">Moments from teaching, research & life.</p>
+            <div class="gallery-scroll" id="galleryContainer"></div>
+        </div>
+    </section>
+
+    <!-- ===== 页脚 ===== -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <p data-i18n="footer.copy">&copy; 2026 MA Xinyi · Built with care.</p>
+            <div class="socials">
+                <a href="https://github.com/Viereinsmai" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/maiaxinyima/" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="mailto:viereinsmai@gmail.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== 模态框 ===== -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box" id="modalBox">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 id="modalTitle"></h2>
+            <div class="meta" id="modalMeta"></div>
+            <div class="desc" id="modalDesc"></div>
+            <div class="gallery-thumbs" id="modalGallery"></div>
+        </div>
+    </div>
+
+    <!-- ===== JavaScript ===== -->
+    <script>
+        (function() {
+            'use strict';
+
+            // ===== 多语言数据 =====
+            const i18n = {
+                en: {
+                    nav: { home: 'Home', education: 'Education', experience: 'Experience', projects: 'Projects', teaching: 'Teaching', skills: 'Skills', gallery: 'Gallery', contact: 'Contact' },
+                    hero: { badge: '✦ English Language & Linguistics', greeting: "Hi, I'm", name: 'Ma Xinyi (Maia)', desc: 'MA in English Studies for the Professions (ELT) @ PolyU. Passionate about language teaching, research, and cross-cultural communication.', btn_edu: 'Education', btn_exp: 'Experience', btn_proj: 'Projects' },
+                    education: { title: 'Education', sub: 'Academic qualifications & achievements.' },
+                    experience: { title: 'Work Experience', sub: 'Professional journey.' },
+                    projects: { title: 'Research & Projects', sub: 'Academic research, teaching innovations, and creative work.' },
+                    teaching: { title: 'Teaching Demos', sub: 'Video recordings and PDF materials from my teaching practice.' },
+                    skills: { title: 'Skills & Certifications', sub: 'Languages, tools, and professional qualifications.' },
+                    gallery: { title: 'Gallery', sub: 'Moments from teaching, research & life.' },
+                    footer: { copy: '© 2026 MA Xinyi (Maia)· Education is not the filling of a pail, but the lighting of a fire.' }
+                },
+                zh: {
+                    nav: { home: '首页', education: '教育', experience: '经历', projects: '项目', teaching: '教学演示', skills: '技能', gallery: '图库', contact: '联系' },
+                    hero: { badge: '✦ 英语语言与语言学', greeting: '你好，我是', name: '马心怡 (Maia)', desc: '香港理工大学专业英文文学（英语语言教育）硕士。热爱语言教学、研究与跨文化沟通。', btn_edu: '教育', btn_exp: '经历', btn_proj: '项目' },
+                    education: { title: '教育背景', sub: '学历与荣誉。' },
+                    experience: { title: '工作经历', sub: '职业历程。' },
+                    projects: { title: '科研与教学创新', sub: '学术研究、教学创新与创意工作。' },
+                    teaching: { title: '教学演示', sub: '教学实践中的视频录像和PDF材料。' },
+                    skills: { title: '技能与证书', sub: '语言、工具与专业资质。' },
+                    gallery: { title: '图库', sub: '教学、研究与生活的瞬间。' },
+                    footer: { copy: '© 2026 马心怡 (Maia)· Education is not the filling of a pail, but the lighting of a fire.' }
+                }
+            };
+
+            // ===== 所有条目详情 =====
+            const entryDetails = {
+                edu1: {
+                    en: { title: 'M.A. in English Studies for the Professions (ELT)', meta: 'The Hong Kong Polytechnic University (qs 50) · 2025-2026', desc: 'GPA 3.6/4.3. Courses: Semantics and Lexis, Second Language Learning, Discourse Analysis, Research Design and Methods. Appointed as PolyU Ambassador 2026.' },
+                    zh: { title: '专业英文文学（英语语言教育）硕士', meta: '香港理工大学(qs50) · 2025-2026', desc: 'GPA 3.6/4.3。主修课程: 语义学与词汇学、二语习得、话语分析、研究设计与方法。2026年香港理工大学校友大使。' },
+                    images: ['images/edu1_1.jpg', 'images/edu1_2.jpg']
+                },
+                edu2: {
+                    en: { title: 'B.A. in Translation', meta: 'Guangxi University (211)· 2016-2020', desc: 'GPA 85.6/100. Proficiency: TEM-8, CET-6, CGT-4. Courses: Applied Translation, General Introduction of Linguistics, English Teaching Methodology. Awards: Dean\'s list Scholarship, Tao Jianming Scholarship, Outstanding Student Cadre.' },
+                    zh: { title: '翻译 文学学士', meta: '广西大学(211)· 2016-2020', desc: 'GPA 85.6/100。通过英语专业八级、大学英语六级、大学德语四级。主修课程: 应用翻译、语言学概论、英语教学法。荣誉: 院长特别荣誉奖学金、陶建明奖学金、优秀学生干部。' },
+                    images: ['images/edu2_1.jpg']
+                },
+                work1: {
+                    en: { title: 'Full-time English Teacher', meta: 'High School Affiliated to Guangxi Normal University · 2021-2025', desc: 'Taught English and managed student classes, focusing on curriculum development and student engagement. Served as Gaokao grader for English in 2024. Judge of 2024 Guilin ICT-Integrated Teaching Competition. Achieved 72% college entrance rate in my class.' },
+                    zh: { title: '高中英语教师（全职）', meta: '广西师范大学附属中学 · 2021-2025', desc: '教授英语课程，任班主任，专注课程开发与学生参与。2024年高考英语科目阅卷教师。担任2024年桂林市信息技术融合教学比赛评委。任课班级高考特控上线率达72%。' },
+                    images: ['images/work1_1.jpg', 'images/work1_2.jpg']
+                },
+                work2: {
+                    en: { title: 'Part-time Teacher', meta: "Hong Kong King's Learning Centre · 2026-present", desc: 'Designed teaching materials for students from P1 to J3 based on their textbooks and learning requirements. Gave lessons to students.' },
+                    zh: { title: '兼职教师', meta: '香港勤学堂 · 2026-至今', desc: '为P1至J3学生设计教材，根据其课本和学习需求制定课程。进行授课。' },
+                    images: ['images/work2_1.jpg']
+                },
+                work3: {
+                    en: { title: 'Editorial Intern', meta: 'Guilin Daily · 2019', desc: 'Conducted interviews and executed editorial workflows, including organizing manuscripts, drafting articles. Published 10+ bylined news reports.' },
+                    zh: { title: '实习记者', meta: '桂林日报社 · 2019', desc: '负责采访、编辑流程，包括整理稿件、撰写文章。发表10余篇署名新闻报道。' },
+                    images: ['images/work3_1.jpg']
+                },
+                proj1: {
+                    en: { title: 'ICLLL 2026 Oral Presentation', meta: 'Tokyo, Japan · Nov 2026', desc: 'Paper accepted for oral presentation and publication in the International Journal of Languages, Literatures and Linguistics (IJLL, ISSN: 2382-6282).' },
+                    zh: { title: 'ICLLL 2026 口头报告', meta: '日本东京 · 2026年11月', desc: '论文被接收为口头报告，并发表于《国际语言、文学与语言学杂志》(IJLL, ISSN: 2382-6282)。' },
+                    images: ['images/proj1_1.jpg']
+                },
+                proj2: {
+                    en: { title: 'ISLS 2026 Oral Presentation', meta: 'PolyU, Hong Kong · May 2026', desc: 'Presented project on Cross-Linguistic Patterns in Representational Gestures: Spatializing Abstract Concepts in Zhuang (L1) and English (L2) Communication. Nominated for Student Research Award.' },
+                    zh: { title: 'ISLS 2026 口头报告', meta: '香港理工大学 · 2026年5月', desc: '报告项目：《二语迁移中的象征手势模式：壮语母语者如何使用象征手势在二语表达中辅助阐述抽象含义》。获学生卓越研究奖提名。' },
+                    images: ['images/proj2_1.jpg']
+                },
+                proj3: {
+                    en: { title: 'Curriculum Reform Project', meta: 'Guangxi Education Department · 2021-2022', desc: 'Co-developed the award-winning curriculum model "Integrated Unit Teaching for Cultivating English Core Competencies". Provided Teaching Module Design.' },
+                    zh: { title: '课程改革项目', meta: '广西教育厅 · 2021-2022', desc: '合作开发获奖课程模式《培养英语核心素养的单元整体教学》。提供教学模块设计。' },
+                    images: ['images/proj3_1.jpg']
+                },
+                proj4: {
+                    en: { title: '"Double Reduction" Policy Research', meta: 'Guilin Education Science · 2022-2025', desc: 'Research project titled "Integrated Teaching-Learning-Assessment Strategies in High School English Reading Classes Under the Double Reduction Policy". Provided authentic data from hands-on teaching classes.' },
+                    zh: { title: '"双减"政策研究', meta: '桂林市教育科学规划领导小组 · 2022-2025', desc: '课题：《"双减"政策下高中英语阅读课堂教学评一体化教学策略研究》。提供教学一线真实数据及课堂案例。' },
+                    images: ['images/proj4_1.jpg']
+                },
+                proj5: {
+                    en: { title: 'Integrated Unit Teaching Model', meta: 'Guangxi Education Department · 2021', desc: 'Award-winning curriculum model for cultivating English core competencies in high school. Focuses on unit integration and student-centered learning.' },
+                    zh: { title: '单元整体教学模式', meta: '广西教育厅 · 2021', desc: '获奖的英语核心素养培养模式，注重单元整合与以学生为中心的教学。' },
+                    images: ['images/proj5_1.jpg']
+                },
+              
+                proj6: {
+                    en: { title: 'English Learning Activity Approach', meta: 'Guangxi Institute of Basic Education · 2021–2022', desc: 'Research on the application of the English Learning Activity Approach theory in senior high school English reading instruction.' },
+                    zh: { title: '英语学习活动观', meta: '广西基础教育研究院 · 2021–2022', desc: '英语学习活动观理论在高中英语阅读教学中的应用研究。' },
+                    images: ['images/proj7_1.jpg']
+                },
+                proj7: {
+                    en: { title: 'Preschool Language Resources', meta: 'National Innovation Program · 2018–2019', desc: 'Provincial-level project on the efficiency of language resources management in preschool education libraries in Western Cities – a case of Nanning, Guangxi.' },
+                    zh: { title: '学前语言资源', meta: '国家级大创项目 · 2018–2019', desc: '省级项目：西部地区学前教育图书馆语言资源管理与利用效率研究——以广西南宁为例。' },
+                    images: ['images/proj8_1.jpg']
+                }
+            };
+
+            // ===== 分组 =====
+            const groups = {
+                education: ['edu1', 'edu2'],
+                experience: ['work1', 'work2', 'work3'],
+                projects: ['proj1', 'proj2', 'proj3', 'proj4', 'proj5', 'proj6', 'proj7']
+            };
+
+            // ===== 项目配色 =====
+            const projectMeta = {
+                proj1: { color: '#c2b9b0', icon: 'fa-comments' },
+                proj2: { color: '#b5a6b6', icon: 'fa-microphone-alt' },
+                proj3: { color: '#a8b5a0', icon: 'fa-book' },
+                proj4: { color: '#d4c5a9', icon: 'fa-file-alt' },
+                proj5: { color: '#b5a6b6', icon: 'fa-chalkboard-teacher' },
+                proj6: { color: '#c2b9b0', icon: 'fa-chart-line' },
+                proj7: { color: '#a8b5a0', icon: 'fa-language' },
+           };
+
+            // ===== 教学演示数据 =====
+            const teachingData = [
+                {
+                    id: 'demo1',
+                    en: { title: 'Reading Comprehension Lesson', desc: 'A 45-minute reading lesson for senior high students focusing on critical thinking and text analysis.' },
+                    zh: { title: '阅读理解课', desc: '面向高中生的阅读课，侧重批判性思维和文本分析。' },
+                    poster: 'images/demo1_cover.jpg',
+                    link:'https://1drv.ms/v/c/6109eba73cf0b66b/IQCYFdMQHVMgR7myQbFvAb4TAbgWMOfrbOLGjk2C2YP_g9Q?e=eSdY2g'
+                },
+                {
+                    id: 'demo2',
+                    en: { title: 'Teaching Statement' },
+                    zh: { title: '教学陈述'},
+                    poster: 'images/demo2_cover.jpg',
+                    pdf: 'pdfs/demo2.pdf',
+                },
+              
+            ];
+
+            // ===== 技能数据 =====
+            const skillsData = {
+                en: [
+                    'English (TEM-8, IELTS 7.5)',
+                    'Mandarin (Native)',
+                    'Cantonese',
+                    'German',
+                    'ELAN · NVivo · SPSS',
+                    'Python',
+                    'R',
+                    'Excel PivotTable',
+                    'Video Editing',
+                    'Teacher Certification (Senior English)',
+                    'Mandarin Proficiency (Level 2A)'
+                ],
+                zh: [
+                    '英语（专业八级，雅思7.5）',
+                    '普通话（母语）',
+                    '粤语',
+                    '德语',
+                    'ELAN · NVivo · SPSS',
+                    'Python',
+                    'R',
+                    'Excel 数据透视表',
+                    '视频编辑',
+                    '高中英语教师资格证',
+                    '普通话二级甲等'
+                ]
+            };
+
+            // ===== 图库图片数据 =====
+            const galleryImages = [
+                { id: 1, src: 'images/my_photo1.jpg', alt: 'Teaching moment' },
+                { id: 2, src: 'images/my_photo2.jpg', alt: 'Conference' },
+                { id: 3, src: 'images/my_photo3.jpg', alt: 'Students' },
+                { id: 4, src: 'images/my_photo4.jpg', alt: 'Workshop' },
+                { id: 5, src: 'images/my_photo5.jpg', alt: 'Students' },
+                { id: 6, src: 'images/my_photo6.jpg', alt: 'Students' },
+                { id: 7, src: 'images/my_photo7.jpg', alt: 'Teaching moment' },
+                { id: 8, src: 'images/my_photo8.jpg', alt: 'Interests' },
+                { id: 9, src: 'images/my_photo9.jpg', alt: 'Nature' },
+
+            ];
+
+            // ===== 当前语言 =====
+            let currentLang = 'en';
+
+            // ===== 渲染教育 & 经历 =====
+            function renderEntries(containerId, entryIds) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = '';
+                entryIds.forEach(id => {
+                    const detail = entryDetails[id];
+                    if (!detail) return;
+                    const lang = currentLang;
+                    const data = detail[lang] || detail.en;
+                    const card = document.createElement('div');
+                    card.className = 'entry-card';
+                    card.setAttribute('data-entry', id);
+                    card.innerHTML = `
+                        <div class="title">${data.title}</div>
+                        <div class="meta"><span>${data.meta}</span></div>
+                        <div class="desc">${data.desc.substring(0, 80)}${data.desc.length > 80 ? '…' : ''}</div>
+                        <div class="click-hint"><i class="fas fa-mouse-pointer"></i> Click for details</div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            // ===== 渲染项目 =====
+            function renderProjects() {
+                const container = document.getElementById('projectsGrid');
+                if (!container) return;
+                container.innerHTML = '';
+                const ids = groups.projects;
+                ids.forEach(id => {
+                    const detail = entryDetails[id];
+                    if (!detail) return;
+                    const lang = currentLang;
+                    const data = detail[lang] || detail.en;
+                    const meta = projectMeta[id] || { color: '#e2dad5', icon: 'fa-star' };
+                    const card = document.createElement('div');
+                    card.className = 'work-card';
+                    card.setAttribute('data-entry', id);
+                    card.innerHTML = `
+                        <div class="thumb" style="background: ${meta.color};">
+                            <i class="fas ${meta.icon}"></i>
+                        </div>
+                        <div class="info">
+                            <span class="tag">Project</span>
+                            <h4>${data.title}</h4>
+                            <p>${data.meta}</p>
+                            <p style="margin-top:6px; font-size:0.9rem; color:var(--text-light);">${data.desc.substring(0, 60)}${data.desc.length > 60 ? '…' : ''}</p>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            // ===== 渲染教学演示（滑动式） =====
+ function renderTeaching() {
+    const container = document.getElementById('teachingContainer');
+    if (!container) return;
+    container.innerHTML = '';
+    teachingData.forEach(item => {
+        const lang = currentLang;
+        const data = item[lang] || item.en;
+        const card = document.createElement('div');
+        card.className = 'teaching-card';
+
+        const hasVideo = item.video && item.video.length > 0;
+        const hasLink = item.link && item.link.length > 0;
+
+        let mediaHTML = '';
+        if (hasVideo) {
+            // 有视频：显示视频播放器
+            const posterAttr = item.poster ? `poster="${item.poster}"` : '';
+            mediaHTML = `
+                <video controls ${posterAttr} preload="metadata">
+                    <source src="${item.video}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            `;
+        } else if (hasLink) {
+    const coverSrc = item.poster || '';
+    mediaHTML = `
+        <a href="${item.link}" target="_blank" class="pdf-cover" style="background-image: url('${coverSrc}');">
+            <i class="fas fa-play-circle"></i>
+        </a>
+    `;
+
+        } else {
+            // 无视频无链接：仅显示封面（无交互）
+            const coverSrc = item.poster || '';
+            mediaHTML = `
+                <div class="pdf-cover" style="background-image: url('${coverSrc}');">
+                    <i class="fas fa-file-pdf"></i>
+                </div>
+            `;
+        }
+
+        // PDF 下载链接（如有）
+        const pdfLink = item.pdf ? `<a href="${item.pdf}" download><i class="fas fa-file-pdf"></i> PDF</a>` : '';
+        const descHTML = data.desc ? `<div class="desc">${data.desc}</div>` : '';
+
+        card.innerHTML = `
+            ${mediaHTML}
+            <div class="info">
+                <h4>${data.title}</h4>
+                ${descHTML}
+                <div class="actions">
+                    ${pdfLink}
+                    <!-- 已移除重复的 Watch 链接，仅保留封面上的 Watch 标签 -->
+                </div>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+            // ===== 渲染技能 =====
+            function renderSkills() {
+                const container = document.getElementById('skillsContainer');
+                if (!container) return;
+                const lang = currentLang;
+                const skills = skillsData[lang] || skillsData.en;
+                container.innerHTML = '';
+                skills.forEach(skill => {
+                    const tag = document.createElement('span');
+                    tag.className = 'skill-tag';
+                    tag.textContent = skill;
+                    container.appendChild(tag);
+                });
+            }
+
+            // ===== 渲染图库 =====
+            function renderGallery() {
+                const container = document.getElementById('galleryContainer');
+                if (!container) return;
+                container.innerHTML = '';
+                galleryImages.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'gallery-item';
+                    div.innerHTML = `
+                        <img src="${item.src}" alt="${item.alt}" loading="lazy" />
+                        <div class="overlay">${item.alt}</div>
+                    `;
+                    div.addEventListener('click', function(e) {
+                        const img = this.querySelector('img');
+                        if (!img) return;
+                        const overlay = document.createElement('div');
+                        overlay.style.cssText = `
+                            position: fixed; inset: 0; background: rgba(74,66,64,0.75);
+                            backdrop-filter: blur(10px); z-index: 9999;
+                            display: flex; align-items: center; justify-content: center;
+                            cursor: pointer; padding: 30px;
+                            animation: fadeIn 0.2s ease;
+                        `;
+                        const style = document.createElement('style');
+                        style.textContent = `
+                            @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+                            @keyframes scaleUp { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+                        `;
+                        document.head.appendChild(style);
+                        const largeImg = document.createElement('img');
+                        largeImg.src = img.src;
+                        largeImg.alt = img.alt;
+                        largeImg.style.cssText = `
+                            max-width: 90vw; max-height: 85vh;
+                            border-radius: 16px; box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+                            animation: scaleUp 0.25s ease;
+                            object-fit: contain;
+                        `;
+                        overlay.appendChild(largeImg);
+                        document.body.appendChild(overlay);
+                        overlay.addEventListener('click', () => { overlay.remove(); style.remove(); });
+                        const escHandler = (e) => {
+                            if (e.key === 'Escape') { overlay.remove(); style.remove(); document.removeEventListener('keydown', escHandler); }
+                        };
+                        document.addEventListener('keydown', escHandler);
+                    });
+                    container.appendChild(div);
+                });
+            }
+
+            // ===== 全部渲染 =====
+            function renderAll() {
+                renderEntries('educationGrid', groups.education);
+                renderEntries('experienceGrid', groups.experience);
+                renderProjects();
+                renderTeaching();
+                renderSkills();
+                renderGallery();
+            }
+            
+
+            // ===== 更新语言 =====
+            function updateLanguage(lang) {
+                const data = i18n[lang];
+                if (!data) return;
+                document.querySelectorAll('[data-i18n]').forEach(el => {
+                    const key = el.getAttribute('data-i18n');
+                    const parts = key.split('.');
+                    let value = data;
+                    for (let p of parts) {
+                        if (value && value[p] !== undefined) value = value[p];
+                        else { value = null; break; }
+                    }
+                    if (value !== null && value !== undefined) {
+                        el.textContent = value;
+                    }
+                });
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.toggle('active', btn.dataset.lang === lang);
+                });
+                currentLang = lang;
+                localStorage.setItem('preferredLang', lang);
+                renderAll();
+            }
+
+            // ===== 语言切换事件 =====
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.dataset.lang;
+                    if (lang === currentLang) return;
+                    updateLanguage(lang);
+                });
+            });
+
+            // ===== 读取保存的语言 =====
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            if (i18n[savedLang]) updateLanguage(savedLang);
+            else updateLanguage('en');
+
+            // ===== 汉堡菜单 =====
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.getElementById('navLinks');
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('open');
+                navLinks.classList.toggle('open');
+            });
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('open');
+                    navLinks.classList.remove('open');
+                });
+            });
+
+            // ===== 导航高亮 =====
+            const sections = document.querySelectorAll('section[id]');
+            const navAnchors = document.querySelectorAll('.nav-links a');
+            function updateActiveNav() {
+                let current = '';
+                const scrollY = window.scrollY + 120;
+                sections.forEach(sec => {
+                    const top = sec.offsetTop;
+                    const height = sec.offsetHeight;
+                    if (scrollY >= top && scrollY < top + height) {
+                        current = sec.getAttribute('id');
+                    }
+                });
+                navAnchors.forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href') === '#' + current) {
+                        a.classList.add('active');
+                    }
+                });
+            }
+            window.addEventListener('scroll', updateActiveNav);
+            window.addEventListener('load', updateActiveNav);
+
+            // ===== 模态框 =====
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalClose = document.getElementById('modalClose');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMeta = document.getElementById('modalMeta');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalGallery = document.getElementById('modalGallery');
+
+            function openModal(entryId) {
+                const detail = entryDetails[entryId];
+                if (!detail) return;
+                const lang = currentLang;
+                const data = detail[lang] || detail.en;
+                modalTitle.textContent = data.title;
+                modalMeta.innerHTML = data.meta;
+                modalDesc.textContent = data.desc;
+                modalGallery.innerHTML = '';
+                if (detail.images && detail.images.length > 0) {
+                    detail.images.forEach(src => {
+                        const img = document.createElement('img');
+                        img.src = src;
+                        img.alt = data.title;
+                        img.onerror = function() { this.style.display = 'none'; };
+                        modalGallery.appendChild(img);
+                    });
+                } else {
+                    modalGallery.innerHTML = '<p style="color:var(--text-light);">No images available.</p>';
+                }
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeModal() {
+                modalOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            // 点击卡片
+            document.addEventListener('click', function(e) {
+                const card = e.target.closest('.entry-card, .work-card');
+                if (card) {
+                    const entryId = card.getAttribute('data-entry');
+                    if (entryId) openModal(entryId);
+                }
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modalOverlay.addEventListener('click', function(e) {
+                if (e.target === this) closeModal();
+            });
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') closeModal();
+            });
+
+            // 语言切换时若模态框打开则关闭
+            const originalUpdate = updateLanguage;
+            updateLanguage = function(lang) {
+                originalUpdate(lang);
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            };
+
+        })();
+    </script>
+
+</body>
+</html>
